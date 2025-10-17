@@ -1,6 +1,11 @@
 <?php
 session_start();
 require_once '../config/database_auto.php';
+require_once '../includes/cart.php';
+
+// Initialize JSON database and make it global
+$GLOBALS['jsonDb'] = new JsonDatabase();
+$jsonDb = $GLOBALS['jsonDb'];
 
 header('Content-Type: application/json');
 
@@ -36,46 +41,22 @@ try {
                 continue;
             }
             
-            // Check if product exists and is in stock
-            $stmt = $pdo->prepare("SELECT id, name, price, sale_price, stock_quantity, in_stock FROM products WHERE id = ? AND status = 'active'");
-            $stmt->execute([$product_id]);
-            $product = $stmt->fetch();
+            // Check if product exists and is active
+            $product = $jsonDb->selectOne('products', ['id' => $product_id, 'status' => 'active']);
             
             if (!$product) {
                 $errors[] = "Product ID {$product_id} not found";
                 continue;
             }
             
-            if (!$product['in_stock']) {
-                $errors[] = "Product '{$product['name']}' is out of stock";
-                continue;
-            }
+            // Use cart functions to add items (handles existing items automatically)
+            $result = addToCart($user_id, $product_id, $quantity);
             
-            // Check if already in cart
-            $stmt = $pdo->prepare("SELECT id, quantity FROM cart WHERE user_id = ? AND product_id = ?");
-            $stmt->execute([$user_id, $product_id]);
-            $existing_item = $stmt->fetch();
-            
-            if ($existing_item) {
-                // Update quantity (add to existing)
-                $new_quantity = $existing_item['quantity'] + $quantity;
-                if ($product['stock_quantity'] > 0 && $new_quantity > $product['stock_quantity']) {
-                    $new_quantity = $product['stock_quantity'];
-                }
-                
-                $stmt = $pdo->prepare("UPDATE cart SET quantity = ?, updated_at = NOW() WHERE user_id = ? AND product_id = ?");
-                $stmt->execute([$new_quantity, $user_id, $product_id]);
+            if ($result['success']) {
+                $migrated_items++;
             } else {
-                // Add new item to cart
-                if ($product['stock_quantity'] > 0 && $quantity > $product['stock_quantity']) {
-                    $quantity = $product['stock_quantity'];
-                }
-                
-                $stmt = $pdo->prepare("INSERT INTO cart (user_id, product_id, quantity, created_at, updated_at) VALUES (?, ?, ?, NOW(), NOW())");
-                $stmt->execute([$user_id, $product_id, $quantity]);
+                $errors[] = $result['message'];
             }
-            
-            $migrated_items++;
         }
         
         $response = [
