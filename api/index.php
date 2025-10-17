@@ -57,6 +57,11 @@ if (strpos($request_uri, '/simple-test.php') === 0) {
     exit;
 }
 
+if (strpos($request_uri, '/basic.php') === 0) {
+    require __DIR__ . '/basic.php';
+    exit;
+}
+
 // Handle admin routes
 if (strpos($request_uri, '/admin') === 0) {
     $admin_file = substr($request_uri, 7); // Remove /admin
