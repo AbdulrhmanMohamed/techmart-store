@@ -20,6 +20,45 @@ if (isset($_GET['debug']) && $_GET['debug'] === 'api') {
     exit;
 }
 
+// Database test mode
+if (isset($_GET['debug']) && $_GET['debug'] === 'db') {
+    header('Content-Type: application/json');
+    $response = ['status' => 'testing_database'];
+    
+    try {
+        // Test file paths
+        $config_path = __DIR__ . '/../config/database_auto.php';
+        $response['config_path'] = $config_path;
+        $response['config_exists'] = file_exists($config_path);
+        
+        if (file_exists($config_path)) {
+            require_once $config_path;
+            $response['config_loaded'] = true;
+            
+            // Test JsonDatabase
+            if (class_exists('JsonDatabase')) {
+                $response['json_db_class_exists'] = true;
+                $jsonDb = new JsonDatabase(__DIR__ . '/../data/');
+                $response['json_db_created'] = true;
+                
+                // Test a simple query
+                $users = $jsonDb->select('users', [], 1);
+                $response['test_query_success'] = true;
+                $response['users_count'] = count($users);
+            } else {
+                $response['json_db_class_exists'] = false;
+            }
+        }
+    } catch (Exception $e) {
+        $response['error'] = $e->getMessage();
+        $response['error_file'] = $e->getFile();
+        $response['error_line'] = $e->getLine();
+    }
+    
+    echo json_encode($response, JSON_PRETTY_PRINT);
+    exit;
+}
+
 // Get the request URI and remove the /api prefix if present
 $request_uri = $_SERVER['REQUEST_URI'] ?? '/';
 $request_uri = parse_url($request_uri, PHP_URL_PATH);
