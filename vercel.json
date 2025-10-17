@@ -4,7 +4,7 @@
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.4",
-      "excludeFiles": "{data/mysql/**,data/mysql,database/**,database_backups/**,wordpress-uploads/**,wordpress-theme/**,*.sql,*.dblwr,*.ibd,*.cnf,*.pem,*.info,binlog.*,ib_*,undo_*,auto.cnf,backup_db.sh,restore_db.sh,cookies.txt,docker-compose.yml,Dockerfile,.dockerignore,railway.toml,nixpacks.toml,test_*.php,debug_*.php,debug_*.json,index-*.php,*.md,DEPLOYMENT_GUIDE.md,VERCEL_DEPLOYMENT.md,README.md,.git/**,.git,node_modules/**,vendor/**,*.log,*.tmp,*.cache,*.sh,*.yml,*.yaml,*.toml,api_test.json,db_debug.json}"
+      "excludeFiles": "{data/**,database/**,wordpress-*/**,*.sql,*.ibd,*.log,*.tmp,*.sh,*.md,.git/**,node_modules/**,vendor/**,debug_*.json,test_*.php}"
     }
   },
   "routes": [
