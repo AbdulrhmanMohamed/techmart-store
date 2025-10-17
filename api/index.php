@@ -42,41 +42,6 @@ if (strpos($request_uri, '/wishlist.php') === 0) {
     exit;
 }
 
-if (strpos($request_uri, '/debug.php') === 0) {
-    require __DIR__ . '/debug.php';
-    exit;
-}
-
-if (strpos($request_uri, '/test-files.php') === 0) {
-    require __DIR__ . '/test-files.php';
-    exit;
-}
-
-if (strpos($request_uri, '/diagnose.php') === 0) {
-    require __DIR__ . '/diagnose.php';
-    exit;
-}
-
-if (strpos($request_uri, '/simple-diagnose.php') === 0) {
-    require 'simple-diagnose.php';
-    exit;
-}
-
-if (strpos($request_uri, '/test-basic.php') === 0) {
-    require 'test-basic.php';
-    exit;
-}
-
-if (strpos($request_uri, '/simple-test.php') === 0) {
-    require __DIR__ . '/simple-test.php';
-    exit;
-}
-
-if (strpos($request_uri, '/basic.php') === 0) {
-    require __DIR__ . '/basic.php';
-    exit;
-}
-
 // Handle admin routes
 if (strpos($request_uri, '/admin') === 0) {
     $admin_file = substr($request_uri, 7); // Remove /admin
