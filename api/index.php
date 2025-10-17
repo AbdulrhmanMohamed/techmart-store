@@ -42,6 +42,11 @@ if (strpos($request_uri, '/wishlist.php') === 0) {
     exit;
 }
 
+if (strpos($request_uri, '/debug-test.php') === 0) {
+    require __DIR__ . '/debug-test.php';
+    exit;
+}
+
 // Handle admin routes
 if (strpos($request_uri, '/admin') === 0) {
     $admin_file = substr($request_uri, 7); // Remove /admin
