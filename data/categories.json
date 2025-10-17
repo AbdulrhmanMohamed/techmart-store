@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "Electronics",
+    "slug": "electronics",
+    "description": "Electronic devices and gadgets",
+    "parent_id": null,
+    "image_url": null,
+    "status": "active",
+    "created_at": "2025-09-21 19:21:34",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 2,
+    "name": "Smartphones",
+    "slug": "smartphones",
+    "description": "Mobile phones and accessories",
+    "parent_id": 1,
+    "image_url": null,
+    "status": "active",
+    "created_at": "2025-09-21 19:21:34",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 3,
+    "name": "Laptops",
+    "slug": "laptops",
+    "description": "Portable computers and notebooks",
+    "parent_id": 1,
+    "image_url": null,
+    "status": "active",
+    "created_at": "2025-09-21 19:21:34",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 4,
+    "name": "Tablets",
+    "slug": "tablets",
+    "description": "Tablet computers and accessories",
+    "parent_id": 1,
+    "image_url": null,
+    "status": "active",
+    "created_at": "2025-09-21 19:21:34",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 5,
+    "name": "Clothing",
+    "slug": "clothing",
+    "description": "Fashion and apparel",
+    "parent_id": null,
+    "image_url": null,
+    "status": "active",
+    "created_at": "2025-09-21 19:21:34",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 6,
+    "name": "Home & Garden",
+    "slug": "home-garden",
+    "description": "Home improvement and garden supplies",
+    "parent_id": null,
+    "image_url": null,
+    "status": "active",
+    "created_at": "2025-09-21 19:21:34",
+    "updated_at": "2025-09-23 21:16:34"
+  }
+]

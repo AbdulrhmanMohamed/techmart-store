@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://phpstore.com/sitemap.xml
+
+# Disallow admin and private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /database/
+Disallow: /assets/css/
+Disallow: /assets/js/
+
+# Allow important pages
+Allow: /assets/images/
+Allow: /assets/css/theme.css
+Allow: /assets/js/
+
+# Crawl delay
+Crawl-delay: 1
+

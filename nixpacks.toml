@@ -1,0 +1,19 @@
+[phases.setup]
+nixPkgs = ["php81", "php81Packages.composer", "apache2"]
+
+[phases.install]
+cmds = ["php -v"]
+
+[phases.build]
+cmds = [
+  "mkdir -p /var/www/html",
+  "cp -r . /var/www/html/",
+  "chown -R www-data:www-data /var/www/html/",
+  "chmod -R 755 /var/www/html/"
+]
+
+[start]
+cmd = "apache2-foreground"
+
+[variables]
+PORT = "80"

@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "name": "Apple",
+    "slug": null,
+    "description": "Technology company known for innovative products",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 2,
+    "name": "Samsung",
+    "slug": null,
+    "description": "Global technology leader in electronics",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 3,
+    "name": "Sony",
+    "slug": null,
+    "description": "Japanese multinational conglomerate",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 4,
+    "name": "Nike",
+    "slug": null,
+    "description": "American multinational corporation for athletic wear",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 5,
+    "name": "Adidas",
+    "slug": null,
+    "description": "German multinational corporation for athletic wear",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 6,
+    "name": "Dell",
+    "slug": null,
+    "description": "American multinational computer technology company",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 7,
+    "name": "HP",
+    "slug": null,
+    "description": "American multinational information technology company",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 8,
+    "name": "Canon",
+    "slug": null,
+    "description": "Japanese multinational corporation specializing in imaging",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 9,
+    "name": "Bose",
+    "slug": null,
+    "description": "American audio equipment company",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 10,
+    "name": "Logitech",
+    "slug": null,
+    "description": "Swiss-American multinational manufacturer of computer peripherals",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 11,
+    "name": "Microsoft",
+    "slug": null,
+    "description": "American multinational technology corporation",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  },
+  {
+    "id": 12,
+    "name": "Amazon Basics",
+    "slug": null,
+    "description": "Amazon's private label brand",
+    "created_at": "2025-09-21 19:21:34",
+    "status": "active",
+    "updated_at": "2025-09-23 21:16:34"
+  }
+]

@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: phpstore_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: phpstore
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+      - ./database/init_updated.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - phpstore_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpstore_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - phpstore_network
+
+
+networks:
+  phpstore_network:
+    driver: bridge

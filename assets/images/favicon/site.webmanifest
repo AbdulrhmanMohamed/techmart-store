@@ -1,0 +1,22 @@
+{
+    "name": "TechMart",
+    "short_name": "TechMart",
+    "description": "Your one-stop shop for quality products at great prices",
+    "icons": [
+        {
+            "src": "/assets/images/favicon/favicon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        },
+        {
+            "src": "/assets/images/favicon/favicon.ico",
+            "sizes": "16x16 32x32 48x48",
+            "type": "image/x-icon"
+        }
+    ],
+    "theme_color": "#2563eb",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "start_url": "/",
+    "scope": "/"
+}
