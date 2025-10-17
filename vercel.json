@@ -33,6 +33,10 @@
       "dest": "/api/hello.php"
     },
     {
+      "src": "/api/debug-output.php",
+      "dest": "/api/debug-output.php"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/index.php"
     },
