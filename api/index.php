@@ -52,6 +52,11 @@ if (strpos($request_uri, '/test-files.php') === 0) {
     exit;
 }
 
+if (strpos($request_uri, '/diagnose.php') === 0) {
+    require __DIR__ . '/diagnose.php';
+    exit;
+}
+
 if (strpos($request_uri, '/simple-test.php') === 0) {
     require __DIR__ . '/simple-test.php';
     exit;
