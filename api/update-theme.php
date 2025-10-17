@@ -4,17 +4,14 @@
  * Handles theme switching requests with database persistence
  */
 
-// Suppress all PHP errors and warnings to ensure clean JSON output
+// Suppress all error output to prevent HTML in JSON responses
 error_reporting(0);
 ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 
 session_start();
 require_once '../config/database_auto.php';
 require_once '../config/theme.php';
-
-// Initialize JSON database and make it global
-$GLOBALS['jsonDb'] = new JsonDatabase();
-$jsonDb = $GLOBALS['jsonDb'];
 
 // Set content type to JSON
 header('Content-Type: application/json');
@@ -49,15 +46,9 @@ $_SESSION['theme'] = $theme_key;
 
 // Save to database if user is logged in
 if (isset($_SESSION['user_id'])) {
-    try {
-        $user_id = $_SESSION['user_id'];
-        $user = $jsonDb->selectOne('users', ['id' => $user_id]);
-        if ($user) {
-            $user['theme'] = $theme_key;
-            $jsonDb->update('users', ['id' => $user_id], $user);
-        }
-    } catch (Exception $e) {
-        error_log("Failed to save theme to database for user " . $_SESSION['user_id'] . ": " . $e->getMessage());
+    $success = saveUserTheme($pdo, $_SESSION['user_id'], $theme_key);
+    if (!$success) {
+        error_log("Failed to save theme to database for user " . $_SESSION['user_id']);
     }
 }
 

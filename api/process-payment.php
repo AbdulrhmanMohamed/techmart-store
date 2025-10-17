@@ -4,9 +4,10 @@
  * Handles Stripe and PayPal payments in test mode
  */
 
-// Suppress all PHP errors and warnings to ensure clean JSON output
+// Suppress all error output to prevent HTML in JSON responses
 error_reporting(0);
 ini_set('display_errors', 0);
+ini_set('log_errors', 1);
 
 session_start();
 require_once '../config/database_auto.php';
