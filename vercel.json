@@ -2,43 +2,15 @@
   "version": 2,
   "framework": null,
   "functions": {
-    "api/*.php": {
+    "api/index.php": {
       "runtime": "vercel-php@0.7.4",
-      "excludeFiles": "{database_backups/**,wordpress-uploads/**,wordpress-theme/**,*.sql,backup_db.sh,restore_db.sh,cookies.txt,docker-compose.yml,Dockerfile,.dockerignore,railway.toml,nixpacks.toml,test_*.php,debug_*.php,index-*.php,*.md}"
+      "excludeFiles": "{data/mysql/**,data/mysql,database/**,database_backups/**,wordpress-uploads/**,wordpress-theme/**,*.sql,backup_db.sh,restore_db.sh,cookies.txt,docker-compose.yml,Dockerfile,.dockerignore,railway.toml,nixpacks.toml,test_*.php,debug_*.php,index-*.php,*.md,DEPLOYMENT_GUIDE.md,VERCEL_DEPLOYMENT.md,README.md,.git/**,.git,node_modules/**,vendor/**,*.log,*.tmp,*.cache,*.sh,*.yml,*.yaml,*.toml}"
     }
   },
   "routes": [
     {
       "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))$",
       "dest": "/$1"
-    },
-    {
-      "src": "/api/cart.php",
-      "dest": "/api/cart.php"
-    },
-    {
-      "src": "/api/test-basic.php",
-      "dest": "/api/test-basic.php"
-    },
-    {
-      "src": "/api/simple-diagnose.php",
-      "dest": "/api/simple-diagnose.php"
-    },
-    {
-      "src": "/api/diagnose.php",
-      "dest": "/api/diagnose.php"
-    },
-    {
-      "src": "/api/hello.php",
-      "dest": "/api/hello.php"
-    },
-    {
-      "src": "/api/debug-output.php",
-      "dest": "/api/debug-output.php"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index.php"
     },
     {
       "src": "/(.*)",
