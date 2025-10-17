@@ -2,6 +2,24 @@
 // Vercel PHP Entry Point
 // This file handles all incoming requests and routes them to the appropriate parts of the application
 
+// Debug mode for API issues
+if (isset($_GET['debug']) && $_GET['debug'] === 'api') {
+    header('Content-Type: application/json');
+    echo json_encode([
+        'status' => 'debug_mode',
+        'request_uri' => $_SERVER['REQUEST_URI'] ?? 'not_set',
+        'request_method' => $_SERVER['REQUEST_METHOD'] ?? 'not_set',
+        'php_version' => phpversion(),
+        'timestamp' => date('Y-m-d H:i:s'),
+        'server_vars' => [
+            'HTTP_HOST' => $_SERVER['HTTP_HOST'] ?? 'not_set',
+            'SCRIPT_NAME' => $_SERVER['SCRIPT_NAME'] ?? 'not_set',
+            'PATH_INFO' => $_SERVER['PATH_INFO'] ?? 'not_set'
+        ]
+    ], JSON_PRETTY_PRINT);
+    exit;
+}
+
 // Get the request URI and remove the /api prefix if present
 $request_uri = $_SERVER['REQUEST_URI'] ?? '/';
 $request_uri = parse_url($request_uri, PHP_URL_PATH);
