@@ -60,12 +60,16 @@ if (isset($_GET['debug']) && $_GET['debug'] === 'db') {
 }
 
 // Get the request URI and remove the /api prefix if present
-$request_uri = $_SERVER['REQUEST_URI'] ?? '/';
-$request_uri = parse_url($request_uri, PHP_URL_PATH);
-
-// Remove /api prefix if present
-if (strpos($request_uri, '/api') === 0) {
-    $request_uri = substr($request_uri, 4);
+$request_uri = $_GET['path'] ?? $_SERVER['REQUEST_URI'] ?? '/';
+if (!isset($_GET['path'])) {
+    $request_uri = parse_url($request_uri, PHP_URL_PATH);
+    // Remove /api prefix if present
+    if (strpos($request_uri, '/api') === 0) {
+        $request_uri = substr($request_uri, 4);
+    }
+} else {
+    // If path is provided via query parameter, use it directly
+    $request_uri = '/' . ltrim($_GET['path'], '/');
 }
 
 // If empty or just /, return API info
