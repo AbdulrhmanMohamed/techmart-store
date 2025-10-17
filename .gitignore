@@ -1,0 +1,54 @@
+# MySQL data files
+data/mysql/
+data/mysql/**
+*.ibd
+*.ibt
+*.cnf
+*.pem
+*.info
+binlog.*
+ib_*
+undo_*
+auto.cnf
+ibtmp*
+
+# Database backups
+database_backups/
+*.sql
+
+# Debug and test files
+debug_*.json
+debug_*.php
+test_*.php
+api_test.json
+db_debug.json
+
+# Logs and temporary files
+*.log
+*.tmp
+*.cache
+cookies.txt
+
+# Docker and deployment files
+docker-compose.yml
+Dockerfile
+.dockerignore
+railway.toml
+nixpacks.toml
+
+# Scripts
+*.sh
+
+# Node modules and vendor
+node_modules/
+vendor/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db

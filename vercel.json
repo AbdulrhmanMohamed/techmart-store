@@ -4,7 +4,7 @@
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.4",
-      "excludeFiles": "{data/**,database/**,wordpress-*/**,*.sql,*.ibd,*.log,*.tmp,*.sh,*.md,.git/**,node_modules/**,vendor/**,debug_*.json,test_*.php}"
+      "excludeFiles": "{*.md,.git/**,node_modules/**,vendor/**}"
     }
   },
   "routes": [
