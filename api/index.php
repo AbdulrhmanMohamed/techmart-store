@@ -68,9 +68,21 @@ if (strpos($request_uri, '/api') === 0) {
     $request_uri = substr($request_uri, 4);
 }
 
-// If empty, default to home
+// If empty or just /, return API info
 if (empty($request_uri) || $request_uri === '/') {
-    $request_uri = '/index.php';
+    header('Content-Type: application/json');
+    echo json_encode([
+        'status' => 'TechMart API',
+        'version' => '1.0',
+        'endpoints' => [
+            '/api/cart.php',
+            '/api/wishlist.php',
+            '/api/process-payment.php',
+            '/api/update-theme.php',
+            '/api/migrate-cart.php'
+        ]
+    ]);
+    exit;
 }
 
 // Handle API routes (existing API files)
