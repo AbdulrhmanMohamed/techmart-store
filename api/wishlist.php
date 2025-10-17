@@ -2,6 +2,10 @@
 session_start();
 require_once '../config/database_auto.php';
 
+// Initialize JSON database and make it global (same as cart.php)
+$GLOBALS['jsonDb'] = new JsonDatabase();
+$jsonDb = $GLOBALS['jsonDb'];
+
 header('Content-Type: application/json');
 
 // Check if user is logged in
