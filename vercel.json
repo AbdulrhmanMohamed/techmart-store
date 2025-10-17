@@ -13,8 +13,24 @@
       "dest": "/$1"
     },
     {
+      "src": "/api/cart.php",
+      "dest": "/api/cart.php"
+    },
+    {
+      "src": "/api/test-basic.php",
+      "dest": "/api/test-basic.php"
+    },
+    {
+      "src": "/api/simple-diagnose.php",
+      "dest": "/api/simple-diagnose.php"
+    },
+    {
+      "src": "/api/diagnose.php",
+      "dest": "/api/diagnose.php"
+    },
+    {
       "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "dest": "/api/index.php"
     },
     {
       "src": "/(.*)",
