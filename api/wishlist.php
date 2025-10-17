@@ -1,8 +1,12 @@
 <?php
-session_start();
-require_once '../config/database_auto.php';
+// Suppress all PHP errors and warnings to ensure clean JSON output
+error_reporting(0);
+ini_set('display_errors', 0);
 
-// Initialize JSON database and make it global (same as cart.php)
+session_start();
+require_once '../config/json_database.php';
+
+// Initialize JSON database and make it global
 $GLOBALS['jsonDb'] = new JsonDatabase();
 $jsonDb = $GLOBALS['jsonDb'];
 
