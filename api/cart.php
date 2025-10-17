@@ -1,17 +1,42 @@
 <?php
-// Suppress all PHP errors and warnings to ensure clean JSON output
-error_reporting(0);
+// Enable error logging for debugging production issues
+error_reporting(E_ALL);
 ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', '/tmp/php_errors.log');
 
-session_start();
-require_once '../config/json_database.php';
-require_once '../includes/cart.php';
+// Start output buffering to catch any unexpected output
+ob_start();
 
-// Initialize JSON database and make it global
-$GLOBALS['jsonDb'] = new JsonDatabase();
-$jsonDb = $GLOBALS['jsonDb'];
+try {
+    session_start();
+    
+    // Log session info for debugging
+    error_log("Cart API - Session ID: " . session_id());
+    error_log("Cart API - User ID: " . (isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 'not set'));
+    
+    require_once '../config/json_database.php';
+    require_once '../includes/cart.php';
 
-header('Content-Type: application/json');
+    // Initialize JSON database and make it global
+    $GLOBALS['jsonDb'] = new JsonDatabase();
+    $jsonDb = $GLOBALS['jsonDb'];
+    
+    error_log("Cart API - JsonDatabase initialized successfully");
+
+    // Clean any unexpected output and set JSON header
+    ob_clean();
+    header('Content-Type: application/json');
+    
+} catch (Exception $e) {
+    // Clean output buffer and send error response
+    ob_clean();
+    header('Content-Type: application/json');
+    http_response_code(500);
+    error_log("Cart API - Fatal error during initialization: " . $e->getMessage());
+    echo json_encode(['success' => false, 'message' => 'Server error during initialization', 'error' => $e->getMessage()]);
+    exit;
+}
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -132,9 +157,32 @@ try {
             break;
     }
 } catch (Exception $e) {
-    error_log("Cart API Error: " . $e->getMessage());
-    http_response_code(400);
-    echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+    error_log("Cart API Error: " . $e->getMessage() . " | File: " . $e->getFile() . " | Line: " . $e->getLine());
+    error_log("Cart API Stack trace: " . $e->getTraceAsString());
+    http_response_code(500);
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Server error: ' . $e->getMessage(),
+        'debug' => [
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
+            'method' => $_SERVER['REQUEST_METHOD'],
+            'user_id' => $user_id ?? 'not set'
+        ]
+    ]);
+} catch (Error $e) {
+    error_log("Cart API Fatal Error: " . $e->getMessage() . " | File: " . $e->getFile() . " | Line: " . $e->getLine());
+    error_log("Cart API Fatal Stack trace: " . $e->getTraceAsString());
+    http_response_code(500);
+    echo json_encode([
+        'success' => false, 
+        'message' => 'Fatal server error: ' . $e->getMessage(),
+        'debug' => [
+            'file' => $e->getFile(),
+            'line' => $e->getLine(),
+            'method' => $_SERVER['REQUEST_METHOD']
+        ]
+    ]);
 }
 ?>
 
