@@ -5,43 +5,63 @@ ini_set('display_errors', 1);
 
 header('Content-Type: application/json');
 
+$response = [
+    'status' => 'testing',
+    'php_version' => phpversion(),
+    'timestamp' => date('Y-m-d H:i:s'),
+    'tests' => []
+];
+
+// Test 1: Basic PHP functionality
+$response['tests']['basic_php'] = 'OK';
+
+// Test 2: File paths
+$data_path = __DIR__ . '/../data/';
+$response['tests']['data_path'] = $data_path;
+$response['tests']['data_path_exists'] = is_dir($data_path) ? 'YES' : 'NO';
+
+// Test 3: Config files
+$config_path = __DIR__ . '/../config/';
+$response['tests']['config_path'] = $config_path;
+$response['tests']['config_path_exists'] = is_dir($config_path) ? 'YES' : 'NO';
+
+// Test 4: Specific config files
+$db_auto_file = $config_path . 'database_auto.php';
+$response['tests']['database_auto_exists'] = file_exists($db_auto_file) ? 'YES' : 'NO';
+
+$json_db_file = $config_path . 'json_database.php';
+$response['tests']['json_database_exists'] = file_exists($json_db_file) ? 'YES' : 'NO';
+
+// Test 5: Try to include files step by step
 try {
-    // Test basic functionality
-    $response = [
-        'status' => 'success',
-        'message' => 'API is working',
-        'php_version' => phpversion(),
-        'server_info' => $_SERVER['SERVER_SOFTWARE'] ?? 'unknown',
-        'timestamp' => date('Y-m-d H:i:s')
-    ];
-    
-    // Test file access
-    $data_path = __DIR__ . '/../data/';
-    $response['data_path'] = $data_path;
-    $response['data_path_exists'] = is_dir($data_path);
-    
-    if (is_dir($data_path)) {
-        $response['data_files'] = scandir($data_path);
+    if (file_exists($json_db_file)) {
+        require_once $json_db_file;
+        $response['tests']['json_database_included'] = 'OK';
+        
+        // Test JsonDatabase class
+        if (class_exists('JsonDatabase')) {
+            $response['tests']['json_database_class'] = 'EXISTS';
+            
+            // Try to create instance
+            $jsonDb = new JsonDatabase($data_path);
+            $response['tests']['json_database_instance'] = 'CREATED';
+        } else {
+            $response['tests']['json_database_class'] = 'NOT_FOUND';
+        }
     }
-    
-    // Test database config
-    if (file_exists(__DIR__ . '/../config/database_auto.php')) {
-        $response['database_config_exists'] = true;
-        require_once __DIR__ . '/../config/database_auto.php';
-        $response['database_loaded'] = true;
-    } else {
-        $response['database_config_exists'] = false;
-    }
-    
-    echo json_encode($response, JSON_PRETTY_PRINT);
-    
 } catch (Exception $e) {
-    http_response_code(500);
-    echo json_encode([
-        'status' => 'error',
-        'message' => $e->getMessage(),
-        'file' => $e->getFile(),
-        'line' => $e->getLine()
-    ], JSON_PRETTY_PRINT);
+    $response['tests']['json_database_error'] = $e->getMessage();
 }
+
+// Test 6: Try database_auto.php
+try {
+    if (file_exists($db_auto_file)) {
+        require_once $db_auto_file;
+        $response['tests']['database_auto_included'] = 'OK';
+    }
+} catch (Exception $e) {
+    $response['tests']['database_auto_error'] = $e->getMessage();
+}
+
+echo json_encode($response, JSON_PRETTY_PRINT);
 ?>
