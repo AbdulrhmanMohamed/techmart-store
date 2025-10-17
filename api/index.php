@@ -91,32 +91,32 @@ if (empty($request_uri) || $request_uri === '/') {
 
 // Handle API routes (existing API files)
 if (strpos($request_uri, '/cart.php') === 0) {
-    require __DIR__ . '/cart.php';
+    require __DIR__ . '/../includes/api-endpoints/cart.php';
     exit;
 }
 
 if (strpos($request_uri, '/migrate-cart.php') === 0) {
-    require __DIR__ . '/migrate-cart.php';
+    require __DIR__ . '/../includes/api-endpoints/migrate-cart.php';
     exit;
 }
 
 if (strpos($request_uri, '/process-payment.php') === 0) {
-    require __DIR__ . '/process-payment.php';
+    require __DIR__ . '/../includes/api-endpoints/process-payment.php';
     exit;
 }
 
 if (strpos($request_uri, '/update-theme.php') === 0) {
-    require __DIR__ . '/update-theme.php';
+    require __DIR__ . '/../includes/api-endpoints/update-theme.php';
     exit;
 }
 
 if (strpos($request_uri, '/wishlist.php') === 0) {
-    require __DIR__ . '/wishlist.php';
+    require __DIR__ . '/../includes/api-endpoints/wishlist.php';
     exit;
 }
 
 if (strpos($request_uri, '/debug-test.php') === 0) {
-    require __DIR__ . '/debug-test.php';
+    require __DIR__ . '/../includes/api-endpoints/debug-test.php';
     exit;
 }
 
