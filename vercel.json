@@ -29,6 +29,10 @@
       "dest": "/api/diagnose.php"
     },
     {
+      "src": "/api/hello.php",
+      "dest": "/api/hello.php"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "/api/index.php"
     },
